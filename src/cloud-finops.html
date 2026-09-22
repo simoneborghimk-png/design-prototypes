@@ -162,7 +162,6 @@
       font-weight: var(--font-weight-semibold);
     }
 
-    /* Service & Settings Sub-tab Panes */
     .overview-subtab-pane,
     .gcp-subtab-pane,
     .storage-subtab-pane,
@@ -187,7 +186,7 @@
     .settings-subtab-pane.is-active,
     .docs-subtab-pane.is-active,
     .cost-reports-subtab-pane.is-active {
-      display: block;
+      display: block !important;
       animation: fadeInView 180ms ease-in-out;
     }
 
@@ -323,6 +322,18 @@
       gap: 6px;
       padding: var(--tw-space-3) 0;
       border-bottom: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+    }
+    .provider-bar-item.is-clickable {
+      cursor: pointer;
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      margin: 2px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--border) 40%, transparent);
+      transition: background-color 150ms ease, transform 150ms ease;
+    }
+    .provider-bar-item.is-clickable:hover {
+      background: color-mix(in oklch, var(--muted) 50%, transparent);
+      transform: translateX(2px);
     }
     .provider-bar-item:last-child {
       border-bottom: none;
@@ -1712,9 +1723,12 @@
                   <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: color-mix(in oklch, var(--primary) 12%, transparent); color: var(--primary); font-size: 14px;">☁️</span>
                 </div>
                 <div style="font-size: 24px; font-weight: 700; color: var(--foreground); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">$74,230</div>
-                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11.5px;">
-                  <span style="color: var(--destructive); font-weight: 500;">+$3,420 (+4.8%)</span>
-                  <span style="color: var(--muted-foreground);">vs mese prec. (MTD)</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px; font-size: 11.5px;">
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                    <span style="color: var(--destructive); font-weight: 500;">+$3,420 (+4.8%)</span>
+                    <span style="color: var(--muted-foreground);">vs prec.</span>
+                  </div>
+                  <button type="button" onclick="switchOverviewTab('by-provider')" style="background: none; border: none; padding: 0; font-size: 11px; color: var(--primary); font-weight: 500; cursor: pointer;" title="Visualizza ripartizione provider">Provider →</button>
                 </div>
               </div>
 
@@ -1725,9 +1739,11 @@
                   <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: color-mix(in oklch, var(--success) 12%, transparent); color: var(--success); font-size: 14px;">💰</span>
                 </div>
                 <div style="font-size: 24px; font-weight: 700; color: var(--success); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">$12,400</div>
-                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11.5px;">
-                  <span style="color: var(--success); font-weight: 500;">-8.2% spesa totale</span>
-                  <span style="color: var(--muted-foreground);">policy FinOps</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px; font-size: 11.5px;">
+                  <div>
+                    <span style="color: var(--success); font-weight: 500;">-8.2% spesa totale</span>
+                  </div>
+                  <button type="button" onclick="navigateToView('recommendations')" style="background: none; border: none; padding: 0; font-size: 11px; color: var(--success); font-weight: 600; cursor: pointer;" title="Visualizza raccomandazioni FinOps">4 Azioni →</button>
                 </div>
               </div>
 
@@ -1738,9 +1754,11 @@
                   <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: color-mix(in oklch, var(--info) 12%, transparent); color: var(--info); font-size: 14px;">🖥️</span>
                 </div>
                 <div style="font-size: 24px; font-weight: 700; color: var(--foreground); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">248</div>
-                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11.5px;">
-                  <span style="color: var(--primary); font-weight: 500;">+14 questa settimana</span>
-                  <span style="color: var(--muted-foreground);">su 3 cloud attivi</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px; font-size: 11.5px;">
+                  <div>
+                    <span style="color: var(--primary); font-weight: 500;">+14 questa sett.</span>
+                  </div>
+                  <button type="button" onclick="switchOverviewTab('by-service')" style="background: none; border: none; padding: 0; font-size: 11px; color: var(--primary); font-weight: 500; cursor: pointer;" title="Visualizza tutti i servizi">Servizi →</button>
                 </div>
               </div>
 
@@ -1914,15 +1932,16 @@
                 <div class="provider-bars-container">
                   
                   <!-- Provider 1: GCP -->
-                  <div class="provider-bar-item">
+                  <div class="provider-bar-item is-clickable" onclick="navigateToView('gcp-compute')" title="Clicca per aprire la vista di dettaglio GCP Compute Engine">
                     <div class="provider-bar-header">
                       <div class="provider-bar-label">
                         <span class="provider-dot" style="background: #4285f4;"></span>
-                        <span>Google Cloud (GCP)</span>
+                        <span style="font-weight: 600;">Google Cloud (GCP)</span>
                       </div>
-                      <div class="provider-bar-stats">
+                      <div class="provider-bar-stats" style="display: flex; align-items: center; gap: 8px;">
                         <span>43.7%</span>
                         <strong>$32,410</strong>
+                        <span style="font-size: 11px; color: #4285f4; font-weight: 600; display: inline-flex; align-items: center;">Dettagli →</span>
                       </div>
                     </div>
                     <div class="provider-bar-track">
@@ -1931,15 +1950,16 @@
                   </div>
 
                   <!-- Provider 2: AWS -->
-                  <div class="provider-bar-item">
+                  <div class="provider-bar-item is-clickable" onclick="navigateToView('aws-ec2')" title="Clicca per aprire la vista di dettaglio AWS EC2">
                     <div class="provider-bar-header">
                       <div class="provider-bar-label">
                         <span class="provider-dot" style="background: #ff9900;"></span>
-                        <span>Amazon Web Services</span>
+                        <span style="font-weight: 600;">Amazon Web Services</span>
                       </div>
-                      <div class="provider-bar-stats">
+                      <div class="provider-bar-stats" style="display: flex; align-items: center; gap: 8px;">
                         <span>38.0%</span>
                         <strong>$28,220</strong>
+                        <span style="font-size: 11px; color: #d97706; font-weight: 600; display: inline-flex; align-items: center;">Dettagli →</span>
                       </div>
                     </div>
                     <div class="provider-bar-track">
@@ -1948,15 +1968,16 @@
                   </div>
 
                   <!-- Provider 3: Azure -->
-                  <div class="provider-bar-item">
+                  <div class="provider-bar-item is-clickable" onclick="showToast('Microsoft Azure', 'Dettagli sottoscrizioni Azure in caricamento...', 'info')" title="Visualizza dettagli Microsoft Azure">
                     <div class="provider-bar-header">
                       <div class="provider-bar-label">
                         <span class="provider-dot" style="background: #0089d6;"></span>
-                        <span>Microsoft Azure</span>
+                        <span style="font-weight: 600;">Microsoft Azure</span>
                       </div>
-                      <div class="provider-bar-stats">
+                      <div class="provider-bar-stats" style="display: flex; align-items: center; gap: 8px;">
                         <span>18.3%</span>
                         <strong>$13,600</strong>
+                        <span style="font-size: 11px; color: #0089d6; font-weight: 600; display: inline-flex; align-items: center;">Dettagli →</span>
                       </div>
                     </div>
                     <div class="provider-bar-track">
@@ -1973,11 +1994,288 @@
                   <span style="font-size: 11px; color: var(--muted-foreground); display: block;">SPESA TOTALE</span>
                   <strong style="font-size: 18px; font-variant-numeric: tabular-nums;">$74,230</strong>
                 </div>
-                <button class="btn btn-outline btn-xs" type="button" onclick="switchOverviewTab('budget-rules')">View Rules →</button>
+                <button class="btn btn-outline btn-xs" type="button" onclick="switchOverviewTab('by-provider')">Dettagli Provider →</button>
               </div>
             </div>
 
-          </div> <!-- /#overview-pane-overview -->
+          </div> <!-- /.dashboard-grid-2-1 -->
+
+          <!-- ================================================================
+               OVERVIEW: VISTE DI DETTAGLIO SERVIZI & RISORSE CLOUD
+               ================================================================ -->
+          <div class="data-grid" style="box-shadow: var(--shadow-sm); margin-top: 24px;">
+            
+            <!-- Toolbar -->
+            <div class="data-grid-toolbar" style="padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border);">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h3 style="font-size: 15px; font-weight: 700; color: var(--foreground); margin: 0;">Viste di Dettaglio Servizi Cloud</h3>
+                  <span class="badge badge-secondary" style="font-size: 11px; font-weight: 600;">7 Viste Collegate</span>
+                </div>
+                <p style="font-size: 12px; color: var(--muted-foreground); margin: 2px 0 0 0;">Accesso diretto alle dashboard analitiche per provider, cluster, storage e database.</p>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div class="data-grid-search">
+                  <svg class="data-grid-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                  <input class="data-grid-search-input" id="ov-detail-search" type="text" placeholder="Cerca servizio o risorsa..." style="width: 220px;" oninput="filterOverviewDetailViews()">
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <button class="filter-pill is-active" id="ov-filter-all" type="button" onclick="filterOverviewDetailCategory('all')">Tutti</button>
+                  <button class="filter-pill" id="ov-filter-gcp" type="button" onclick="filterOverviewDetailCategory('GCP')">GCP</button>
+                  <button class="filter-pill" id="ov-filter-aws" type="button" onclick="filterOverviewDetailCategory('AWS')">AWS</button>
+                  <button class="filter-pill" id="ov-filter-compute" type="button" onclick="filterOverviewDetailCategory('Compute')">Compute</button>
+                  <button class="filter-pill" id="ov-filter-storage" type="button" onclick="filterOverviewDetailCategory('Storage')">Storage</button>
+                  <button class="filter-pill" id="ov-filter-database" type="button" onclick="filterOverviewDetailCategory('Database')">Database</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Table with Direct Navigation to All Detail Views -->
+            <div class="data-grid-table-container">
+              <table class="data-grid-table" id="ov-detail-views-table">
+                <thead>
+                  <tr>
+                    <th style="width: 280px;">Servizio / Vista di Dettaglio</th>
+                    <th>Provider</th>
+                    <th>Categoria</th>
+                    <th style="text-align: right;">Inventario</th>
+                    <th style="text-align: right;">Spesa Mensile</th>
+                    <th style="text-align: right;">Quota Totale</th>
+                    <th>Stato &amp; Risparmio</th>
+                    <th style="text-align: right; width: 190px;">Collegamento Diretto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- 1. GCP Compute Engine -->
+                  <tr data-provider="GCP" data-category="Compute" data-name="gcp compute engine macchine virtuali n2 e2 c2">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(66, 133, 244, 0.12); color: #4285f4; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">⚡</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">GCP Compute Engine</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">VM ad alte prestazioni serie N2, E2, C2</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(66, 133, 244, 0.12); color: #4285f4; font-weight: 600;">GCP</span></td>
+                    <td><span class="badge badge-outline">Compute</span></td>
+                    <td style="text-align: right; font-weight: 500;">8 VM attive</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$19,200</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">25.9%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 25.9%; height: 100%; background: #4285f4;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-success" style="font-size: 10.5px;">-$2,640/mo potenziale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-primary btn-xs" type="button" onclick="navigateToView('gcp-compute')" style="font-weight: 600;">
+                        Dettagli Compute Engine →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 2. AWS EC2 Instances & Clusters -->
+                  <tr data-provider="AWS" data-category="Compute" data-name="aws ec2 instances cluster m5 c5 r5">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(255, 153, 0, 0.12); color: #ff9900; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">🖥️</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">AWS EC2 Instances</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">Cluster m5, c5, r5 in eu-west-1 &amp; us-east-1</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(255, 153, 0, 0.12); color: #d97706; font-weight: 600;">AWS</span></td>
+                    <td><span class="badge badge-outline">Compute</span></td>
+                    <td style="text-align: right; font-weight: 500;">14 istanze · 6 cluster</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$18,500</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">24.9%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 24.9%; height: 100%; background: #ff9900;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-success" style="font-size: 10.5px;">-$1,840/mo potenziale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-primary btn-xs" type="button" onclick="navigateToView('aws-ec2')" style="font-weight: 600;">
+                        Dettagli AWS EC2 →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 3. AWS Aurora RDS -->
+                  <tr data-provider="AWS" data-category="Database" data-name="aws aurora rds postgresql managed database">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(139, 92, 246, 0.12); color: #8b5cf6; display: flex; align-items: center; justify-content: center; font-size: 15px;">🗄️</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">AWS Aurora RDS PostgreSQL</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">Cluster Multi-AZ con auto-scaling e replica</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(255, 153, 0, 0.12); color: #d97706; font-weight: 600;">AWS</span></td>
+                    <td><span class="badge badge-outline">Database</span></td>
+                    <td style="text-align: right; font-weight: 500;">4 cluster DB</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$4,800</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">6.5%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 6.5%; height: 100%; background: #8b5cf6;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-success" style="font-size: 10.5px;">-$780/mo potenziale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-outline btn-xs" type="button" onclick="navigateToView('aws-rds')" style="font-weight: 500;">
+                        Dettagli Aurora RDS →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 4. GCP BigQuery Enterprise -->
+                  <tr data-provider="GCP" data-category="Analytics" data-name="gcp bigquery enterprise serverless data warehouse">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(66, 133, 244, 0.12); color: #4285f4; display: flex; align-items: center; justify-content: center; font-size: 15px;">📊</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">GCP BigQuery Enterprise</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">Serverless Data Warehouse con flat-rate slots</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(66, 133, 244, 0.12); color: #4285f4; font-weight: 600;">GCP</span></td>
+                    <td><span class="badge badge-outline">Analytics</span></td>
+                    <td style="text-align: right; font-weight: 500;">1 DW (12.4 TB)</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$3,400</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">4.6%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 4.6%; height: 100%; background: #4285f4;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-success" style="font-size: 10.5px;">-$310/mo potenziale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-outline btn-xs" type="button" onclick="navigateToView('gcp-bigquery')" style="font-weight: 500;">
+                        Dettagli BigQuery →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 5. AWS S3 Storage -->
+                  <tr data-provider="AWS" data-category="Storage" data-name="aws s3 storage object bucket intelligent tiering">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 15px;">🪣</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">AWS S3 Object Storage</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">Bucket Standard, Glacier &amp; Intelligent-Tiering</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(255, 153, 0, 0.12); color: #d97706; font-weight: 600;">AWS</span></td>
+                    <td><span class="badge badge-outline">Storage</span></td>
+                    <td style="text-align: right; font-weight: 500;">8 bucket (92 TB)</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$2,120</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">2.9%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 2.9%; height: 100%; background: #10b981;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-success" style="font-size: 10.5px;">-$240/mo potenziale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-outline btn-xs" type="button" onclick="navigateToView('aws-s3')" style="font-weight: 500;">
+                        Dettagli AWS S3 →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 6. GCP Cloud Storage -->
+                  <tr data-provider="GCP" data-category="Storage" data-name="gcp cloud storage bucket nearline coldline">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(66, 133, 244, 0.12); color: #4285f4; display: flex; align-items: center; justify-content: center; font-size: 15px;">🗂️</div>
+                        <div>
+                          <strong style="color: var(--foreground); display: block; font-size: 13px;">GCP Cloud Storage</strong>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">Bucket Standard, Nearline, Coldline in europe-west1</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge" style="background: rgba(66, 133, 244, 0.12); color: #4285f4; font-weight: 600;">GCP</span></td>
+                    <td><span class="badge badge-outline">Storage</span></td>
+                    <td style="text-align: right; font-weight: 500;">6 bucket (54 TB)</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$1,120</td>
+                    <td style="text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">1.5%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 1.5%; height: 100%; background: #10b981;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge badge-outline" style="font-size: 10.5px;">Ottimale</span></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-outline btn-xs" type="button" onclick="navigateToView('gcp-storage')" style="font-weight: 500;">
+                        Dettagli Cloud Storage →
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- 7. Focus Singola Risorsa: EC2-Prod-Cluster -->
+                  <tr data-provider="AWS" data-category="Compute" data-name="ec2 prod cluster i-0e2b3c4d5a6fb workload critico produzione">
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent);">
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 6px; background: color-mix(in oklch, var(--primary) 12%, transparent); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;">🔍</div>
+                        <div>
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: var(--foreground); font-size: 13px;">EC2-Prod-Cluster</strong>
+                            <span class="badge badge-success" style="font-size: 9px; padding: 1px 5px;">● Running</span>
+                          </div>
+                          <span style="font-size: 11px; color: var(--muted-foreground);">ID: <code>i-0e2b3c4d5a6fb</code> · Core Workload</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent);"><span class="badge" style="background: rgba(255, 153, 0, 0.12); color: #d97706; font-weight: 600;">AWS</span></td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent);"><span class="badge badge-outline">Resource Detail</span></td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent); text-align: right; font-weight: 500;">Nodo c5.4xlarge</td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent); text-align: right; font-weight: 700; color: var(--foreground); font-size: 13px;">$2,450</td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent); text-align: right;">
+                      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
+                        <span style="font-size: 11.5px; font-weight: 600;">3.3%</span>
+                        <div style="width: 40px; height: 5px; background: var(--muted); border-radius: 9999px; overflow: hidden;">
+                          <div style="width: 3.3%; height: 100%; background: var(--primary);"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent);"><span class="badge badge-warning" style="font-size: 10.5px;">Ottimizzazione -$1,840/mo</span></td>
+                    <td style="background: color-mix(in oklch, var(--primary) 3%, transparent); text-align: right;">
+                      <button class="btn btn-outline btn-xs" type="button" onclick="navigateToView('resource-detail')" style="border-color: var(--primary); color: var(--primary); font-weight: 600;">
+                        Scheda Risorsa Singola →
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div> <!-- /.data-grid -->
+
+        </div> <!-- /#overview-pane-overview -->
 
           <!-- ==================================================================
                OVERVIEW PANE 2: BY PROVIDER (Full Interactive Sub-Page)
@@ -10324,7 +10622,7 @@
       function navigateToView(viewId) {
         // Resolve sub-routes to parent views
         let targetViewId = viewId;
-        if (viewId.startsWith('overview')) targetViewId = 'overview';
+        if (viewId.startsWith('overview') || viewId === 'by-provider' || viewId === 'by-service') targetViewId = 'overview';
         else if (viewId.startsWith('cost-reports')) targetViewId = 'cost-reports';
         else if (viewId.startsWith('aws-ec2')) targetViewId = 'aws-ec2';
         else if (viewId.startsWith('aws-s3')) targetViewId = 'aws-s3';
@@ -10401,9 +10699,9 @@
         // Handle sub-routes for Cloud Overview tabs
         if (viewId === 'overview' || viewId === 'overview-overview') {
           switchOverviewTab('overview', false);
-        } else if (viewId === 'overview-by-provider') {
+        } else if (viewId === 'overview-by-provider' || viewId === 'by-provider') {
           switchOverviewTab('by-provider', false);
-        } else if (viewId === 'overview-by-service') {
+        } else if (viewId === 'overview-by-service' || viewId === 'by-service') {
           switchOverviewTab('by-service', false);
         } else if (viewId === 'overview-budget-rules') {
           switchOverviewTab('budget-rules', false);
@@ -10545,10 +10843,13 @@
           btn.classList.toggle('is-active', target === tabKey);
         });
 
-        // Update Subtab Panes
+        // Update Subtab Panes with both class and explicit inline style
         tabs.forEach(key => {
           const pane = document.getElementById(`overview-pane-${key}`);
-          if (pane) pane.classList.toggle('is-active', key === tabKey);
+          if (pane) {
+            pane.classList.toggle('is-active', key === tabKey);
+            pane.style.display = (key === tabKey) ? 'block' : 'none';
+          }
         });
 
         // Update Breadcrumb
@@ -10568,10 +10869,41 @@
         const pageContent = document.querySelector('.page-content');
         if (pageContent) pageContent.scrollTo({ top: 0, behavior: 'smooth' });
       }
+      window.switchOverviewTab = switchOverviewTab;
 
       // ----------------------------------------------------------------------
       // Cloud Overview: Sub-Pages Interactive Controllers
       // ----------------------------------------------------------------------
+
+      // Detail Views Filter on Main Overview Tab
+      function filterOverviewDetailViews() {
+        const input = document.getElementById('ov-detail-search');
+        const term = (input ? input.value : '').toLowerCase().trim();
+        const rows = document.querySelectorAll('#ov-detail-views-table tbody tr');
+        rows.forEach(tr => {
+          const name = (tr.getAttribute('data-name') || '').toLowerCase();
+          const prov = (tr.getAttribute('data-provider') || '').toLowerCase();
+          const cat = (tr.getAttribute('data-category') || '').toLowerCase();
+          const match = !term || name.includes(term) || prov.includes(term) || cat.includes(term);
+          tr.style.display = match ? '' : 'none';
+        });
+      }
+
+      function filterOverviewDetailCategory(category) {
+        document.querySelectorAll('#overview-pane-overview .filter-pill').forEach(btn => {
+          const pillId = btn.id.replace('ov-filter-', '').toLowerCase();
+          btn.classList.toggle('is-active', pillId === category.toLowerCase());
+        });
+        const rows = document.querySelectorAll('#ov-detail-views-table tbody tr');
+        rows.forEach(tr => {
+          const rowCat = tr.getAttribute('data-category') || '';
+          const rowProv = tr.getAttribute('data-provider') || '';
+          const match = (category === 'all') || (category === rowCat) || (category === rowProv);
+          tr.style.display = match ? '' : 'none';
+        });
+      }
+      window.filterOverviewDetailViews = filterOverviewDetailViews;
+      window.filterOverviewDetailCategory = filterOverviewDetailCategory;
 
       // 1. By Provider: Filter Projects & Accounts Table
       function filterProviderProjects() {
@@ -12256,13 +12588,24 @@
         });
       });
 
+      // Explicit click listeners for Overview sub-navigation tabs
+      document.querySelectorAll('#view-overview .view-subnav-tab').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = btn.getAttribute('data-subtab');
+          if (target && typeof switchOverviewTab === 'function') {
+            switchOverviewTab(target);
+          }
+        });
+      });
+
       // Initial Route check
       const initialHash = window.location.hash.replace('#', '') || 'overview';
       navigateToView(initialHash);
 
       window.addEventListener('hashchange', () => {
         const h = window.location.hash.replace('#', '');
-        if (h && views[h]) navigateToView(h);
+        if (h) navigateToView(h);
       });
 
       // ----------------------------------------------------------------------
