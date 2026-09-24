@@ -72,13 +72,57 @@
   justify-content: center;
 }
 
-.data-grid-search .input {
-  padding-left: 2.25rem;
-  padding-right: 2rem;
-  width: 100%;
-  height: 2rem;
+.data-grid-search .input,
+.data-grid-search-input {
+  height: 32px;
+  padding-left: 32px;
+  padding-right: 28px;
+  border-radius: var(--radius-md, 6px);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
   font-size: 0.8125rem;
-  background-color: var(--card);
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 150ms ease, box-shadow 150ms ease, width 150ms ease;
+}
+
+.data-grid-search-input:focus,
+.data-grid-search .input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 20%, transparent);
+}
+
+.data-grid-search-input::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.85;
+}
+
+.data-grid-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  border-radius: 9999px;
+  width: 18px;
+  height: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.data-grid-search-clear:hover {
+  background: var(--muted);
+  color: var(--foreground);
 }
 
 .data-grid-search-kbd {
@@ -127,6 +171,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

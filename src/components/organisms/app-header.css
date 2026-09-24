@@ -116,8 +116,9 @@
 .app-header-breadcrumb {
   display: inline-flex;
   align-items: center;
-  gap: var(--tw-space-1-5);
+  gap: 0.375rem;
   font-size: 0.8125rem;
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -126,16 +127,50 @@
 .app-header-breadcrumb-item {
   color: var(--muted-foreground);
   text-decoration: none;
-  transition: color 150ms ease;
+  font-weight: var(--font-weight-normal, 400);
+  cursor: pointer;
+  border-radius: var(--radius-sm, 3px);
+  padding: 0.125rem 0.25rem;
+  margin: -0.125rem -0.25rem;
+  transition: color 140ms ease, background-color 140ms ease;
 }
 
 .app-header-breadcrumb-item:hover {
   color: var(--foreground);
+  background-color: var(--accent);
+  text-decoration: none;
+}
+
+.app-header-breadcrumb-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.app-header-breadcrumb-item.is-static {
+  cursor: default;
+  pointer-events: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.app-header-breadcrumb-separator {
+  color: var(--muted-foreground);
+  opacity: 0.35;
+  font-size: 0.75rem;
+  font-weight: 300;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.125rem;
 }
 
 .app-header-breadcrumb-current {
   color: var(--foreground);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold, 600);
+  padding: 0.125rem 0.25rem;
+  margin: -0.125rem -0.25rem;
+  cursor: default;
 }
 
 /* --------------------------------------------------------------------------
