@@ -1,5 +1,8 @@
 # Design System & Cloud FinOps Interactive Prototypes
 
+[![Live Demo - Component Showcase](https://img.shields.io/badge/Live%20Demo-Component%20Showcase-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white)](https://simoneborghimk-png.github.io/design-prototypes/src/index.html)
+[![Live Demo - Cloud FinOps](https://img.shields.io/badge/Live%20Demo-Cloud%20FinOps%20Platform-0284c7?style=for-the-badge&logo=azureartifacts&logoColor=white)](https://simoneborghimk-png.github.io/design-prototypes/src/cloud-finops.html)
+
 [![Design Tokens](https://img.shields.io/badge/Design%20Tokens-850%2B%20OKLCH-blue)](src/tokens/tokens.css)
 [![Figma Parity](https://img.shields.io/badge/Figma-shadcn%2Fui%20Pro%20Blocks-indigo)](docs/FIGMA-COMPONENTS.md)
 [![A11y](https://img.shields.io/badge/A11y-WCAG%202.2%20AA-emerald)](.antigravity/rules.md)
@@ -10,10 +13,22 @@ A high-fidelity, production-grade frontend design system and interactive applica
 
 ---
 
+## Live Demos & Online Previews
+
+Try the interactive prototypes directly in your browser:
+
+| Prototype | Description | Live Demo | Source Code |
+| :--- | :--- | :--- | :--- |
+| **Component Showcase & Sandbox** | Complete library of 49+ atomic, molecular, organism, and block components with interactive state visualizers and light/dark theme toggles. | [**Launch Showcase 🚀**](https://simoneborghimk-png.github.io/design-prototypes/src/index.html) | [`src/index.html`](src/index.html) |
+| **Enterprise Cloud FinOps** | Production-ready SaaS dashboard featuring multi-cloud cost intelligence, interactive Azure VM data grids with filters, KPIs, and responsive app shell. | [**Launch FinOps App 🚀**](https://simoneborghimk-png.github.io/design-prototypes/src/cloud-finops.html) | [`src/cloud-finops.html`](src/cloud-finops.html) |
+
+---
+
 ## Table of Contents
 
 - [Overview](#overview)
 - [Key Features](#key-features)
+- [Live Demos & Online Previews](#live-demos--online-previews)
 - [Interactive Prototypes](#interactive-prototypes)
   - [1. Component Sandbox & Showcase](#1-component-sandbox--showcase-srcindexhtml)
   - [2. Enterprise Cloud FinOps Platform](#2-enterprise-cloud-finops-platform-srccloud-finopshtml)
@@ -51,12 +66,14 @@ Every component, interaction, color variable, and state is mapped to tokenized v
 
 ### 1. Component Sandbox & Showcase (`src/index.html`)
 An interactive component explorer containing all 49+ design system primitives, molecules, organisms, and page blocks.
+- **Live Demo:** [Open Component Showcase](https://simoneborghimk-png.github.io/design-prototypes/src/index.html)
 - **Live Variant Testing:** Buttons, Badges, Inputs, Sliders, Modals, Drawers, Sheets, and Tabs.
 - **State Visualizers:** Default, Hover, Active, Focus, Disabled, Loading, Error, and Empty states.
 - **Token Inspection:** Live dark/light theme switcher and variable token references.
 
 ### 2. Enterprise Cloud FinOps Platform (`src/cloud-finops.html`)
 A complete, interactive SaaS enterprise application prototype simulating a modern cloud financial management dashboard.
+- **Live Demo:** [Open Cloud FinOps Platform](https://simoneborghimk-png.github.io/design-prototypes/src/cloud-finops.html)
 - **Multi-Cloud Monitoring:** Track AWS, Azure, and GCP spending across accounts and regions.
 - **Virtual Machines Cost Breakdown:** Azure VM inventory management with interactive sorting, multi-attribute filtering, and pagination.
 - **Interactive KPI Cards:** Burn rates, budget forecasts, anomaly detections, and savings plans.
