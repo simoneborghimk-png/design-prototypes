@@ -217,6 +217,8 @@
     }
 
     .view-subnav-tab {
+      display: inline-flex;
+      align-items: center;
       padding: var(--tw-space-2) var(--tw-space-3);
       font-size: var(--text-sm-font-size);
       font-weight: var(--font-weight-medium);
@@ -2195,16 +2197,26 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="overview-tab-btn-overview" data-subtab="overview"
-              type="button" onclick="switchOverviewTab('overview')">Overview</button>
+              type="button" onclick="switchOverviewTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="overview-tab-btn-by-provider" data-subtab="by-provider" type="button"
-              onclick="switchOverviewTab('by-provider')">By Provider</button>
+              onclick="switchOverviewTab('by-provider')">
+              <i class="fa-light fa-cloud" style="margin-right: 6px;"></i>By Provider
+            </button>
             <button class="view-subnav-tab" id="overview-tab-btn-by-service" data-subtab="by-service" type="button"
-              onclick="switchOverviewTab('by-service')">By Service</button>
+              onclick="switchOverviewTab('by-service')">
+              <i class="fa-light fa-cubes" style="margin-right: 6px;"></i>By Service
+            </button>
             <button class="view-subnav-tab" id="overview-tab-btn-budget-rules" data-subtab="budget-rules" type="button"
-              onclick="switchOverviewTab('budget-rules')">Budget Rules</button>
+              onclick="switchOverviewTab('budget-rules')">
+              <i class="fa-light fa-bullseye" style="margin-right: 6px;"></i>Budget Rules
+            </button>
             <button class="view-subnav-tab" id="overview-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchOverviewTab('recommendations')">Recommendations (<span
-                id="overview-recs-tab-count">4</span>)</button>
+              type="button" onclick="switchOverviewTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations (<span
+                id="overview-recs-tab-count">4</span>)
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -5336,13 +5348,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="cost-reports-tab-btn-trends" data-subtab="trends"
-              type="button" onclick="switchCostReportsTab('trends')">Monthly Trends</button>
+              type="button" onclick="switchCostReportsTab('trends')">
+              <i class="fa-light fa-chart-line-up" style="margin-right: 6px;"></i>Monthly Trends
+            </button>
             <button class="view-subnav-tab" id="cost-reports-tab-btn-services" data-subtab="services" type="button"
-              onclick="switchCostReportsTab('services')">Service Breakdown (8)</button>
+              onclick="switchCostReportsTab('services')">
+              <i class="fa-light fa-chart-column" style="margin-right: 6px;"></i>Service Breakdown (8)
+            </button>
             <button class="view-subnav-tab" id="cost-reports-tab-btn-allocation" data-subtab="allocation" type="button"
-              onclick="switchCostReportsTab('allocation')">Allocation by Team (5)</button>
+              onclick="switchCostReportsTab('allocation')">
+              <i class="fa-light fa-users" style="margin-right: 6px;"></i>Allocation by Team (5)
+            </button>
             <button class="view-subnav-tab" id="cost-reports-tab-btn-scheduled" data-subtab="scheduled" type="button"
-              onclick="switchCostReportsTab('scheduled')">Scheduled Reports (4)</button>
+              onclick="switchCostReportsTab('scheduled')">
+              <i class="fa-light fa-calendar-days" style="margin-right: 6px;"></i>Scheduled Reports (4)
+            </button>
           </div>
 
           <!-- ================================================================
@@ -6602,13 +6622,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="aws-ec2-tab-btn-clusters" data-subtab="clusters" type="button"
-              onclick="switchAwsEc2Tab('clusters')">Clusters (6)</button>
+              onclick="switchAwsEc2Tab('clusters')">
+              <i class="fa-light fa-server" style="margin-right: 6px;"></i>Clusters (6)
+            </button>
             <button class="view-subnav-tab" id="aws-ec2-tab-btn-instances" data-subtab="instances" type="button"
-              onclick="switchAwsEc2Tab('instances')">All Instances (42)</button>
+              onclick="switchAwsEc2Tab('instances')">
+              <i class="fa-light fa-microchip" style="margin-right: 6px;"></i>All Instances (42)
+            </button>
             <button class="view-subnav-tab" id="aws-ec2-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAwsEc2Tab('recommendations')">Savings &amp; Spot (3)</button>
+              type="button" onclick="switchAwsEc2Tab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Savings &amp; Spot (3)
+            </button>
             <button class="view-subnav-tab" id="aws-ec2-tab-btn-tags" data-subtab="tags" type="button"
-              onclick="switchAwsEc2Tab('tags')">Tags &amp; Allocation</button>
+              onclick="switchAwsEc2Tab('tags')">
+              <i class="fa-light fa-tag" style="margin-right: 6px;"></i>Tags &amp; Allocation
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -7608,13 +7636,20 @@
 
           <!-- Secondary Sub-tabs -->
           <nav class="view-subnav-tabs">
-            <button class="view-subnav-tab is-active" type="button">Overview</button>
+            <button class="view-subnav-tab is-active" type="button">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" type="button"
-              onclick="showToast('Cost History', 'Loading 12-month historical data...', 'info')">Cost History</button>
-            <button class="view-subnav-tab" type="button" onclick="navigateToView('recommendations')">Recommendations
-              (1)</button>
+              onclick="showToast('Cost History', 'Loading 12-month historical data...', 'info')">
+              <i class="fa-light fa-clock-rotate-left" style="margin-right: 6px;"></i>Cost History
+            </button>
+            <button class="view-subnav-tab" type="button" onclick="navigateToView('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations (1)
+            </button>
             <button class="view-subnav-tab" type="button"
-              onclick="showToast('Tags', 'prod, platform, finops, eu-west-1', 'info')">Tags (4)</button>
+              onclick="showToast('Tags', 'prod, platform, finops, eu-west-1', 'info')">
+              <i class="fa-light fa-tag" style="margin-right: 6px;"></i>Tags (4)
+            </button>
           </nav>
 
           <!-- Top Meta Grid (2 Columns: Details + Cost/CPU) -->
@@ -7736,13 +7771,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="aws-s3-tab-btn-overview" data-subtab="overview" type="button"
-              onclick="switchAwsS3Tab('overview')">Overview</button>
+              onclick="switchAwsS3Tab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="aws-s3-tab-btn-buckets" data-subtab="buckets" type="button"
-              onclick="switchAwsS3Tab('buckets')">Buckets (7)</button>
+              onclick="switchAwsS3Tab('buckets')">
+              <i class="fa-light fa-box-archive" style="margin-right: 6px;"></i>Buckets (7)
+            </button>
             <button class="view-subnav-tab" id="aws-s3-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAwsS3Tab('recommendations')">Recommendations (3)</button>
+              type="button" onclick="switchAwsS3Tab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations (3)
+            </button>
             <button class="view-subnav-tab" id="aws-s3-tab-btn-lifecycle" data-subtab="lifecycle" type="button"
-              onclick="switchAwsS3Tab('lifecycle')">Lifecycle &amp; Governance</button>
+              onclick="switchAwsS3Tab('lifecycle')">
+              <i class="fa-light fa-arrows-rotate" style="margin-right: 6px;"></i>Lifecycle &amp; Governance
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -8508,13 +8551,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="aws-rds-tab-btn-overview" data-subtab="overview" type="button"
-              onclick="switchAwsRdsTab('overview')">Overview</button>
+              onclick="switchAwsRdsTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="aws-rds-tab-btn-databases" data-subtab="databases" type="button"
-              onclick="switchAwsRdsTab('databases')">Databases (4)</button>
+              onclick="switchAwsRdsTab('databases')">
+              <i class="fa-light fa-database" style="margin-right: 6px;"></i>Databases (4)
+            </button>
             <button class="view-subnav-tab" id="aws-rds-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAwsRdsTab('recommendations')">Recommendations (3)</button>
+              type="button" onclick="switchAwsRdsTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations (3)
+            </button>
             <button class="view-subnav-tab" id="aws-rds-tab-btn-performance" data-subtab="performance" type="button"
-              onclick="switchAwsRdsTab('performance')">Performance &amp; Storage</button>
+              onclick="switchAwsRdsTab('performance')">
+              <i class="fa-light fa-chart-line-up" style="margin-right: 6px;"></i>Performance &amp; Storage
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -9243,13 +9294,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="compute-tab-btn-overview" data-subtab="overview" type="button"
-              onclick="switchComputeTab('overview')">Overview</button>
+              onclick="switchComputeTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="compute-tab-btn-resources" data-subtab="resources" type="button"
-              onclick="switchComputeTab('resources')">All Resources</button>
+              onclick="switchComputeTab('resources')">
+              <i class="fa-light fa-server" style="margin-right: 6px;"></i>All Resources
+            </button>
             <button class="view-subnav-tab" id="compute-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchComputeTab('recommendations')">Recommendations</button>
+              type="button" onclick="switchComputeTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations
+            </button>
             <button class="view-subnav-tab" id="compute-tab-btn-tags" data-subtab="tags" type="button"
-              onclick="switchComputeTab('tags')">Tags</button>
+              onclick="switchComputeTab('tags')">
+              <i class="fa-light fa-tag" style="margin-right: 6px;"></i>Tags
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -10903,13 +10962,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="storage-tab-btn-overview" data-subtab="overview" type="button"
-              onclick="switchStorageTab('overview')">Overview</button>
+              onclick="switchStorageTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="storage-tab-btn-buckets" data-subtab="buckets" type="button"
-              onclick="switchStorageTab('buckets')">Buckets (All Resources)</button>
+              onclick="switchStorageTab('buckets')">
+              <i class="fa-light fa-box-archive" style="margin-right: 6px;"></i>Buckets (All Resources)
+            </button>
             <button class="view-subnav-tab" id="storage-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchStorageTab('recommendations')">Recommendations</button>
+              type="button" onclick="switchStorageTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations
+            </button>
             <button class="view-subnav-tab" id="storage-tab-btn-lifecycle" data-subtab="lifecycle" type="button"
-              onclick="switchStorageTab('lifecycle')">Lifecycle & Governance</button>
+              onclick="switchStorageTab('lifecycle')">
+              <i class="fa-light fa-arrows-rotate" style="margin-right: 6px;"></i>Lifecycle &amp; Governance
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -11850,13 +11917,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="bigquery-tab-btn-overview" data-subtab="overview"
-              type="button" onclick="switchBigQueryTab('overview')">Overview</button>
+              type="button" onclick="switchBigQueryTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="bigquery-tab-btn-datasets" data-subtab="datasets" type="button"
-              onclick="switchBigQueryTab('datasets')">Datasets &amp; Tables</button>
+              onclick="switchBigQueryTab('datasets')">
+              <i class="fa-light fa-database" style="margin-right: 6px;"></i>Datasets &amp; Tables
+            </button>
             <button class="view-subnav-tab" id="bigquery-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchBigQueryTab('recommendations')">Recommendations</button>
+              type="button" onclick="switchBigQueryTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Recommendations
+            </button>
             <button class="view-subnav-tab" id="bigquery-tab-btn-slots" data-subtab="slots" type="button"
-              onclick="switchBigQueryTab('slots')">Slots &amp; Governance</button>
+              onclick="switchBigQueryTab('slots')">
+              <i class="fa-light fa-sliders" style="margin-right: 6px;"></i>Slots &amp; Governance
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -12865,13 +12940,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="azure-vm-tab-btn-instances" data-subtab="instances"
-              type="button" onclick="switchAzureVmTab('instances')">Instances (16)</button>
+              type="button" onclick="switchAzureVmTab('instances')">
+              <i class="fa-light fa-server" style="margin-right: 6px;"></i>Instances (16)
+            </button>
             <button class="view-subnav-tab" id="azure-vm-tab-btn-scalesets" data-subtab="scalesets" type="button"
-              onclick="switchAzureVmTab('scalesets')">VM Scale Sets (3)</button>
+              onclick="switchAzureVmTab('scalesets')">
+              <i class="fa-light fa-layer-group" style="margin-right: 6px;"></i>VM Scale Sets (3)
+            </button>
             <button class="view-subnav-tab" id="azure-vm-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAzureVmTab('recommendations')">Advisor &amp; Savings (4)</button>
+              type="button" onclick="switchAzureVmTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Advisor &amp; Savings (4)
+            </button>
             <button class="view-subnav-tab" id="azure-vm-tab-btn-reservations" data-subtab="reservations" type="button"
-              onclick="switchAzureVmTab('reservations')">Reservations &amp; AHB</button>
+              onclick="switchAzureVmTab('reservations')">
+              <i class="fa-light fa-shield-check" style="margin-right: 6px;"></i>Reservations &amp; AHB
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -13837,13 +13920,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="azure-blob-tab-btn-overview" data-subtab="overview"
-              type="button" onclick="switchAzureBlobTab('overview')">Overview</button>
+              type="button" onclick="switchAzureBlobTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="azure-blob-tab-btn-containers" data-subtab="containers" type="button"
-              onclick="switchAzureBlobTab('containers')">Storage Accounts (8)</button>
+              onclick="switchAzureBlobTab('containers')">
+              <i class="fa-light fa-box-archive" style="margin-right: 6px;"></i>Storage Accounts (8)
+            </button>
             <button class="view-subnav-tab" id="azure-blob-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAzureBlobTab('recommendations')">Tiering &amp; Lifecycle (3)</button>
+              type="button" onclick="switchAzureBlobTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>Tiering &amp; Lifecycle (3)
+            </button>
             <button class="view-subnav-tab" id="azure-blob-tab-btn-lifecycle" data-subtab="lifecycle" type="button"
-              onclick="switchAzureBlobTab('lifecycle')">Access &amp; Security</button>
+              onclick="switchAzureBlobTab('lifecycle')">
+              <i class="fa-light fa-lock" style="margin-right: 6px;"></i>Access &amp; Security
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -14420,13 +14511,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="azure-cosmos-tab-btn-overview" data-subtab="overview"
-              type="button" onclick="switchAzureCosmosTab('overview')">Overview</button>
+              type="button" onclick="switchAzureCosmosTab('overview')">
+              <i class="fa-light fa-chart-pie" style="margin-right: 6px;"></i>Overview
+            </button>
             <button class="view-subnav-tab" id="azure-cosmos-tab-btn-accounts" data-subtab="accounts" type="button"
-              onclick="switchAzureCosmosTab('accounts')">Database Accounts (4)</button>
+              onclick="switchAzureCosmosTab('accounts')">
+              <i class="fa-light fa-database" style="margin-right: 6px;"></i>Database Accounts (4)
+            </button>
             <button class="view-subnav-tab" id="azure-cosmos-tab-btn-recommendations" data-subtab="recommendations"
-              type="button" onclick="switchAzureCosmosTab('recommendations')">RU/s Optimization (3)</button>
+              type="button" onclick="switchAzureCosmosTab('recommendations')">
+              <i class="fa-light fa-lightbulb" style="margin-right: 6px;"></i>RU/s Optimization (3)
+            </button>
             <button class="view-subnav-tab" id="azure-cosmos-tab-btn-throughput" data-subtab="throughput" type="button"
-              onclick="switchAzureCosmosTab('throughput')">Throughput &amp; Regions</button>
+              onclick="switchAzureCosmosTab('throughput')">
+              <i class="fa-light fa-globe" style="margin-right: 6px;"></i>Throughput &amp; Regions
+            </button>
           </div>
 
           <!-- ==================================================================
@@ -14953,13 +15052,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="integrations-tab-btn-all" data-subtab="all" type="button"
-              onclick="switchIntegrationsTab('all')">All (8)</button>
+              onclick="switchIntegrationsTab('all')">
+              <i class="fa-light fa-puzzle-piece" style="margin-right: 6px;"></i>All (8)
+            </button>
             <button class="view-subnav-tab" id="integrations-tab-btn-cloud" data-subtab="cloud" type="button"
-              onclick="switchIntegrationsTab('cloud')">Cloud &amp; Billing (3)</button>
+              onclick="switchIntegrationsTab('cloud')">
+              <i class="fa-light fa-cloud" style="margin-right: 6px;"></i>Cloud &amp; Billing (3)
+            </button>
             <button class="view-subnav-tab" id="integrations-tab-btn-alerting" data-subtab="alerting" type="button"
-              onclick="switchIntegrationsTab('alerting')">Alerting &amp; ChatOps (3)</button>
+              onclick="switchIntegrationsTab('alerting')">
+              <i class="fa-light fa-bell" style="margin-right: 6px;"></i>Alerting &amp; ChatOps (3)
+            </button>
             <button class="view-subnav-tab" id="integrations-tab-btn-cicd" data-subtab="cicd" type="button"
-              onclick="switchIntegrationsTab('cicd')">CI/CD &amp; APM (2)</button>
+              onclick="switchIntegrationsTab('cicd')">
+              <i class="fa-light fa-rocket" style="margin-right: 6px;"></i>CI/CD &amp; APM (2)
+            </button>
           </div>
 
           <!-- 4 Top KPI Cards (4 Horizontal Columns) -->
@@ -15416,13 +15523,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="settings-tab-btn-general" data-subtab="general" type="button"
-              onclick="switchSettingsTab('general')">General &amp; Workspace</button>
+              onclick="switchSettingsTab('general')">
+              <i class="fa-light fa-gear" style="margin-right: 6px;"></i>General &amp; Workspace
+            </button>
             <button class="view-subnav-tab" id="settings-tab-btn-budgets" data-subtab="budgets" type="button"
-              onclick="switchSettingsTab('budgets')">Budget &amp; Alerts</button>
+              onclick="switchSettingsTab('budgets')">
+              <i class="fa-light fa-bullseye" style="margin-right: 6px;"></i>Budget &amp; Alerts
+            </button>
             <button class="view-subnav-tab" id="settings-tab-btn-security" data-subtab="security" type="button"
-              onclick="switchSettingsTab('security')">RBAC Security &amp; Access</button>
+              onclick="switchSettingsTab('security')">
+              <i class="fa-light fa-shield-halved" style="margin-right: 6px;"></i>RBAC Security &amp; Access
+            </button>
             <button class="view-subnav-tab" id="settings-tab-btn-api" data-subtab="api" type="button"
-              onclick="switchSettingsTab('api')">API Keys &amp; Webhooks</button>
+              onclick="switchSettingsTab('api')">
+              <i class="fa-light fa-key" style="margin-right: 6px;"></i>API Keys &amp; Webhooks
+            </button>
           </div>
 
           <!-- PANE 1: GENERALE & WORKSPACE -->
@@ -15833,13 +15948,21 @@
           <div class="view-subnav-tabs"
             style="border-bottom: 1px solid var(--border); margin-bottom: 24px; padding-bottom: 0;">
             <button class="view-subnav-tab is-active" id="docs-tab-btn-framework" data-subtab="framework" type="button"
-              onclick="switchDocsTab('framework')">FinOps Framework</button>
+              onclick="switchDocsTab('framework')">
+              <i class="fa-light fa-book-open" style="margin-right: 6px;"></i>FinOps Framework
+            </button>
             <button class="view-subnav-tab" id="docs-tab-btn-tagging" data-subtab="tagging" type="button"
-              onclick="switchDocsTab('tagging')">Tagging Policy</button>
+              onclick="switchDocsTab('tagging')">
+              <i class="fa-light fa-tag" style="margin-right: 6px;"></i>Tagging Policy
+            </button>
             <button class="view-subnav-tab" id="docs-tab-btn-runbooks" data-subtab="runbooks" type="button"
-              onclick="switchDocsTab('runbooks')">Optimization Runbooks</button>
+              onclick="switchDocsTab('runbooks')">
+              <i class="fa-light fa-file-lines" style="margin-right: 6px;"></i>Optimization Runbooks
+            </button>
             <button class="view-subnav-tab" id="docs-tab-btn-api-ref" data-subtab="api-ref" type="button"
-              onclick="switchDocsTab('api-ref')">API &amp; Webhook Reference</button>
+              onclick="switchDocsTab('api-ref')">
+              <i class="fa-light fa-code" style="margin-right: 6px;"></i>API &amp; Webhook Reference
+            </button>
           </div>
 
           <!-- PANE 1: FRAMEWORK FINOPS -->
