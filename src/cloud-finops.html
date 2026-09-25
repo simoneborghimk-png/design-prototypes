@@ -7711,41 +7711,49 @@
                 <span class="badge badge-secondary" style="font-size: 11px;">May 2026</span>
               </div>
 
-              <!-- Visual segmented bar -->
+              <!-- Stacked Progress Bar -->
               <div
-                style="height: 12px; border-radius: 9999px; overflow: hidden; display: flex; gap: 2px; margin-bottom: 14px; background: var(--muted);">
-                <div style="width: 62%; background: #3b82f6;" title="Standard: 62%"></div>
-                <div style="width: 16%; background: #06b6d4;" title="Intelligent-Tiering: 16%"></div>
-                <div style="width: 14%; background: #f59e0b;" title="Glacier Flexible: 14%"></div>
-                <div style="width: 8%; background: #8b5cf6;" title="Deep Archive: 8%"></div>
+                style="display: flex; height: 16px; border-radius: 9999px; overflow: hidden; background: var(--muted); margin: 16px 0 14px 0;">
+                <div style="width: 62%; background: #3b82f6;" title="Standard: 11.28 TB (62%) · $1,450/mo"></div>
+                <div style="width: 16%; background: #06b6d4;" title="Intelligent-Tiering: 2.91 TB (16%) · $360/mo"></div>
+                <div style="width: 14%; background: #f59e0b;" title="Glacier Flexible: 2.55 TB (14%) · $240/mo"></div>
+                <div style="width: 8%; background: #8b5cf6;" title="Deep Archive: 1.46 TB (8%) · $50/mo"></div>
               </div>
 
-              <!-- Legend -->
+              <!-- Legend Grid -->
               <div
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 12px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span
                     style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; display: inline-block;"></span>
-                  <span><strong>Standard: 11.28 TB (62%)</strong><br><span
-                      style="color: var(--muted-foreground);">$1,450/mo · Frequent access</span></span>
+                  <div>
+                    <span style="font-weight: 600; color: var(--foreground);">Standard: 11.28 TB (62%)</span>
+                    <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$1,450/mo · Frequent access</span>
+                  </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span
                     style="width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span>
-                  <span><strong>Intelligent-Tiering: 2.91 TB (16%)</strong><br><span
-                      style="color: var(--muted-foreground);">$360/mo · Auto-downscale</span></span>
+                  <div>
+                    <span style="font-weight: 600; color: var(--foreground);">Intelligent-Tiering: 2.91 TB (16%)</span>
+                    <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$360/mo · Auto-downscale</span>
+                  </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span
                     style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
-                  <span><strong>Glacier Flexible: 2.55 TB (14%)</strong><br><span
-                      style="color: var(--muted-foreground);">$240/mo · Min 90gg</span></span>
+                  <div>
+                    <span style="font-weight: 600; color: var(--foreground);">Glacier Flexible: 2.55 TB (14%)</span>
+                    <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$240/mo · Min 90 days</span>
+                  </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span
                     style="width: 10px; height: 10px; border-radius: 50%; background: #8b5cf6; display: inline-block;"></span>
-                  <span><strong>Deep Archive: 1.46 TB (8%)</strong><br><span
-                      style="color: var(--muted-foreground);">$50/mo · Min 180gg</span></span>
+                  <div>
+                    <span style="font-weight: 600; color: var(--foreground);">Deep Archive: 1.46 TB (8%)</span>
+                    <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$50/mo · Min 180 days</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -13658,58 +13666,50 @@
             <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 20px; margin-bottom: 24px;">
               <div class="card"
                 style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                  <h4 style="font-size: 16px; font-weight: 700; color: var(--foreground); margin: 0;">
-                    Capacity by Storage Access Tier
-                  </h4>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                  <div>
+                    <h4 style="font-size: 15px; font-weight: 600; color: var(--foreground); margin: 0 0 4px 0;">
+                      Capacity by Storage Access Tier
+                    </h4>
+                    <p style="font-size: 12.5px; color: var(--muted-foreground); margin: 0;">Breakdown of 6.42 TB across Hot, Cool, and Archive tiers with unit costs.</p>
+                  </div>
                   <span class="badge badge-outline" style="font-size: 11px;">6,420 GB Total</span>
                 </div>
 
-                <!-- Multi-segment progress bar -->
+                <!-- Stacked Progress Bar -->
                 <div
-                  style="display: flex; width: 100%; height: 24px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; background: var(--muted);">
-                  <div
-                    style="width: 32.7%; background: #0089d6; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Hot Tier: 2,100 GB (32.7%)">
-                    Hot 33%
-                  </div>
-                  <div
-                    style="width: 49.8%; background: #0284c7; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Cool Tier: 3,200 GB (49.8%)">
-                    Cool 50%
-                  </div>
-                  <div
-                    style="width: 17.5%; background: #64748b; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Archive Tier: 1,120 GB (17.5%)">
-                    Archive 17%
-                  </div>
+                  style="display: flex; height: 16px; border-radius: 9999px; overflow: hidden; background: var(--muted); margin: 16px 0 14px 0;">
+                  <div style="width: 32.7%; background: #3b82f6;" title="Hot Tier: 2,100 GB (32.7%) · $0.0184/GB/mo"></div>
+                  <div style="width: 49.8%; background: #06b6d4;" title="Cool Tier: 3,200 GB (49.8%) · $0.010/GB/mo"></div>
+                  <div style="width: 17.5%; background: #8b5cf6;" title="Archive Tier: 1,120 GB (17.5%) · $0.00099/GB/mo"></div>
                 </div>
 
+                <!-- Legend Grid -->
                 <div
-                  style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; font-size: 12px;">
-                  <div style="padding: 10px; background: var(--muted); border-radius: var(--radius-md);">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                      <span style="width: 8px; height: 8px; border-radius: 50%; background: #0089d6;"></span>
-                      <span style="font-weight: 600;">Hot Tier</span>
+                  style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 12px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Hot Tier: 2.1 TB (32.7%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$520/mo · Frequent access</span>
                     </div>
-                    <div style="font-size: 16px; font-weight: 700; color: var(--foreground);">2.1 TB</div>
-                    <div style="font-size: 11px; color: var(--muted-foreground);">$0.0184 / GB-mo · $520/mo</div>
                   </div>
-                  <div style="padding: 10px; background: var(--muted); border-radius: var(--radius-md);">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                      <span style="width: 8px; height: 8px; border-radius: 50%; background: #0284c7;"></span>
-                      <span style="font-weight: 600;">Cool Tier</span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Cool Tier: 3.2 TB (49.8%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$320/mo · Min 30 days</span>
                     </div>
-                    <div style="font-size: 16px; font-weight: 700; color: var(--foreground);">3.2 TB</div>
-                    <div style="font-size: 11px; color: var(--muted-foreground);">$0.0100 / GB-mo · $320/mo</div>
                   </div>
-                  <div style="padding: 10px; background: var(--muted); border-radius: var(--radius-md);">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                      <span style="width: 8px; height: 8px; border-radius: 50%; background: #64748b;"></span>
-                      <span style="font-weight: 600;">Archive Tier</span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #8b5cf6; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Archive Tier: 1.1 TB (17.5%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">$14/mo · Min 180 days</span>
                     </div>
-                    <div style="font-size: 16px; font-weight: 700; color: var(--foreground);">1.1 TB</div>
-                    <div style="font-size: 11px; color: var(--muted-foreground);">$0.00099 / GB-mo · $14/mo</div>
                   </div>
                 </div>
               </div>
@@ -14231,41 +14231,50 @@
             <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 20px; margin-bottom: 24px;">
               <div class="card"
                 style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card);">
-                <h4 style="font-size: 16px; font-weight: 700; color: var(--foreground); margin: 0 0 16px 0;">
-                  Throughput Mode &amp; RU Allocation
-                </h4>
-                <div
-                  style="display: flex; width: 100%; height: 24px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; background: var(--muted);">
-                  <div
-                    style="width: 68.5%; background: #0089d6; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Autoscale RU/s: 25,000 RU/s (68.5%)">
-                    Autoscale RU/s (68.5%)
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                  <div>
+                    <h4 style="font-size: 15px; font-weight: 600; color: var(--foreground); margin: 0 0 4px 0;">
+                      Throughput Mode &amp; RU Allocation
+                    </h4>
+                    <p style="font-size: 12.5px; color: var(--muted-foreground); margin: 0;">Distribution of 36,500 RU/s provisioned across Autoscale, Manual, and Serverless.</p>
                   </div>
-                  <div
-                    style="width: 23.3%; background: #0284c7; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Manual Provisioned: 8,500 RU/s (23.3%)">
-                    Manual (23.3%)
-                  </div>
-                  <div
-                    style="width: 8.2%; background: #64748b; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700;"
-                    title="Serverless: 3,000 RU/s equivalent (8.2%)">
-                    Serverless (8.2%)
-                  </div>
+                  <span class="badge badge-outline" style="font-size: 11px;">36.5k RU/s Total</span>
                 </div>
 
+                <!-- Stacked Progress Bar -->
                 <div
-                  style="background: var(--muted); border-radius: var(--radius-md); padding: 14px; font-size: 12px; line-height: 1.6;">
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                    <span style="color: var(--muted-foreground);">Autoscale Tier Max Ceiling:</span>
-                    <strong style="color: var(--foreground);">25,000 max RU/s (Scales down to 2,500 RU/s idle)</strong>
+                  style="display: flex; height: 16px; border-radius: 9999px; overflow: hidden; background: var(--muted); margin: 16px 0 14px 0;">
+                  <div style="width: 68.5%; background: #3b82f6;" title="Autoscale RU/s: 25,000 RU/s (68.5%)"></div>
+                  <div style="width: 23.3%; background: #06b6d4;" title="Manual Provisioned: 8,500 RU/s (23.3%) · $0.008/100 RU/s-h"></div>
+                  <div style="width: 8.2%; background: #8b5cf6;" title="Serverless: 3,000 RU/s equivalent (8.2%)"></div>
+                </div>
+
+                <!-- Legend Grid -->
+                <div
+                  style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 12px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Autoscale: 25k RU/s (68.5%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">Max ceiling · Scales to 2.5k</span>
+                    </div>
                   </div>
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                    <span style="color: var(--muted-foreground);">Manual Provisioned (Fixed):</span>
-                    <strong style="color: var(--foreground);">8,500 RU/s ($0.008 per 100 RU/s-hour)</strong>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Manual: 8.5k RU/s (23.3%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">Fixed · $0.008 / 100 RU/s-hr</span>
+                    </div>
                   </div>
-                  <div style="display: flex; justify-content: space-between;">
-                    <span style="color: var(--muted-foreground);">Storage Consumed:</span>
-                    <strong style="color: var(--foreground);">342 GB ($0.25 / GB-mo)</strong>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                      style="width: 10px; height: 10px; border-radius: 50%; background: #8b5cf6; display: inline-block;"></span>
+                    <div>
+                      <span style="font-weight: 600; color: var(--foreground);">Serverless: ~3k RU/s (8.2%)</span>
+                      <span style="display: block; font-size: 11px; color: var(--muted-foreground);">342 GB · $0.25 / GB-mo</span>
+                    </div>
                   </div>
                 </div>
               </div>
