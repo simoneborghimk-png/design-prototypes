@@ -17215,6 +17215,8 @@
               <span class="badge badge-success" style="font-size: 11px;">Real-Time Triggers Active</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
+              <button class="btn btn-outline btn-sm" type="button" onclick="openChannelConfigModal('new')"><i
+                  class="fa-light fa-plus" style="margin-right: 5px;"></i> Add Channel</button>
               <button class="btn btn-outline btn-sm" type="button" onclick="sendTestNotification()"><i
                   class="fa-light fa-bell" style="margin-right: 5px;"></i> Send Test
                 Alert</button>
@@ -17226,52 +17228,180 @@
 
           <!-- Connected Channels Overview -->
           <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px;">
-            <div class="kpi-card" style="padding: 18px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong style="color: var(--foreground);">Slack Integration</strong>
-                <span class="badge badge-success" style="font-size: 9.5px;">Connected</span>
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+
+            <!-- Channel 1: Slack Integration -->
+            <div class="kpi-card" id="channel-card-slack"
+              style="padding: 18px; display: flex; flex-direction: column; justify-content: space-between; transition: opacity 150ms ease;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div
+                      style="width: 38px; height: 38px; border-radius: var(--radius-md, 8px); background: #4a154b18; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+                      <i class="fa-brands fa-slack" style="color: #4a154b;"></i>
+                    </div>
+                    <div>
+                      <strong style="color: var(--foreground); font-size: 14.5px; display: block; line-height: 1.2;">Slack Integration</strong>
+                      <span style="font-size: 11px; color: var(--muted-foreground);">ChatOps &amp; Alerts</span>
+                    </div>
+                  </div>
+                  <span class="badge badge-success channel-status-badge" style="font-size: 10px;">Connected</span>
+                </div>
+                <div style="font-size: 12px; margin-bottom: 8px;">
+                  <span style="color: var(--muted-foreground);">Destination:</span>
+                  <code id="channel-dest-slack">#finops-alerts</code>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+                  <span style="color: var(--success);"><i class="fa-light fa-circle-check" style="margin-right: 4px;"></i>18 sent this month</span>
+                  <span class="badge badge-outline" style="font-size: 9.5px;">All Severities</span>
+                </div>
               </div>
-              <p style="font-size: 12px; color: var(--muted-foreground); margin: 0 0 10px 0;">Destination:
-                <code>#finops-alerts</code>
-              </p>
-              <span style="font-size: 11px; color: var(--success);"><i class="fa-light fa-check"
-                  style="color: var(--success); margin-right: 4px;"></i> 18 notifications sent this month</span>
+              <div
+                style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; margin-top: 14px; border-top: 1px solid var(--border); gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button class="btn btn-outline btn-xs" type="button" onclick="openChannelConfigModal('slack')">
+                    <i class="fa-light fa-sliders" style="margin-right: 4px;"></i> Configure
+                  </button>
+                  <button class="btn btn-ghost btn-xs" type="button" onclick="testNotificationChannel('Slack')">
+                    <i class="fa-light fa-paper-plane" style="margin-right: 4px;"></i> Test
+                  </button>
+                </div>
+                <button class="btn btn-ghost btn-xs" type="button" title="Mute or pause Slack channel" onclick="toggleChannelStatus('slack')"
+                  id="btn-toggle-slack" style="color: var(--muted-foreground);">
+                  <i class="fa-light fa-power-off"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="kpi-card" style="padding: 18px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong style="color: var(--foreground);">Email Delivery</strong>
-                <span class="badge badge-success" style="font-size: 9.5px;">Connected</span>
+            <!-- Channel 2: Email Delivery -->
+            <div class="kpi-card" id="channel-card-email"
+              style="padding: 18px; display: flex; flex-direction: column; justify-content: space-between; transition: opacity 150ms ease;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div
+                      style="width: 38px; height: 38px; border-radius: var(--radius-md, 8px); background: color-mix(in oklch, var(--primary) 14%, transparent); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                      <i class="fa-light fa-envelope" style="color: var(--primary);"></i>
+                    </div>
+                    <div>
+                      <strong style="color: var(--foreground); font-size: 14.5px; display: block; line-height: 1.2;">Email Delivery</strong>
+                      <span style="font-size: 11px; color: var(--muted-foreground);">Executive Summaries</span>
+                    </div>
+                  </div>
+                  <span class="badge badge-success channel-status-badge" style="font-size: 10px;">Connected</span>
+                </div>
+                <div style="font-size: 12px; margin-bottom: 8px;">
+                  <span style="color: var(--muted-foreground);">To:</span>
+                  <code id="channel-dest-email">simone.borghi@company.com</code>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+                  <span style="color: var(--success);"><i class="fa-light fa-circle-check" style="margin-right: 4px;"></i>Weekly digests</span>
+                  <span class="badge badge-outline" style="font-size: 9.5px;">Digest + Critical</span>
+                </div>
               </div>
-              <p style="font-size: 12px; color: var(--muted-foreground); margin: 0 0 10px 0;">To:
-                <code>simone.borghi@company.com</code>
-              </p>
-              <span style="font-size: 11px; color: var(--success);"><i class="fa-light fa-check"
-                  style="color: var(--success); margin-right: 4px;"></i> Weekly digests and critical alerts</span>
+              <div
+                style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; margin-top: 14px; border-top: 1px solid var(--border); gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button class="btn btn-outline btn-xs" type="button" onclick="openChannelConfigModal('email')">
+                    <i class="fa-light fa-sliders" style="margin-right: 4px;"></i> Configure
+                  </button>
+                  <button class="btn btn-ghost btn-xs" type="button" onclick="testNotificationChannel('Email')">
+                    <i class="fa-light fa-paper-plane" style="margin-right: 4px;"></i> Test
+                  </button>
+                </div>
+                <button class="btn btn-ghost btn-xs" type="button" title="Mute or pause Email channel" onclick="toggleChannelStatus('email')"
+                  id="btn-toggle-email" style="color: var(--muted-foreground);">
+                  <i class="fa-light fa-power-off"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="kpi-card" style="padding: 18px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong style="color: var(--foreground);">Microsoft Teams</strong>
-                <span class="badge badge-success" style="font-size: 9.5px;">Connected</span>
+            <!-- Channel 3: Microsoft Teams -->
+            <div class="kpi-card" id="channel-card-teams"
+              style="padding: 18px; display: flex; flex-direction: column; justify-content: space-between; transition: opacity 150ms ease;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div
+                      style="width: 38px; height: 38px; border-radius: var(--radius-md, 8px); background: #5059C918; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                      <i class="fa-brands fa-microsoft" style="color: #5059C9;"></i>
+                    </div>
+                    <div>
+                      <strong style="color: var(--foreground); font-size: 14.5px; display: block; line-height: 1.2;">Microsoft Teams</strong>
+                      <span style="font-size: 11px; color: var(--muted-foreground);">Incoming Webhook</span>
+                    </div>
+                  </div>
+                  <span class="badge badge-success channel-status-badge" style="font-size: 10px;">Connected</span>
+                </div>
+                <div style="font-size: 12px; margin-bottom: 8px;">
+                  <span style="color: var(--muted-foreground);">Webhook:</span>
+                  <code id="channel-dest-teams">FinOps Core Channel</code>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+                  <span style="color: var(--muted-foreground);"><i class="fa-light fa-triangle-exclamation" style="margin-right: 4px; color: var(--color-amber-500);"></i>Cost spike alerts</span>
+                  <span class="badge badge-outline" style="font-size: 9.5px;">Warning &gt; $1k</span>
+                </div>
               </div>
-              <p style="font-size: 12px; color: var(--muted-foreground); margin: 0 0 10px 0;">Webhook:
-                <code>FinOps Core Channel</code>
-              </p>
-              <span style="font-size: 11px; color: var(--muted-foreground);">Cost spike notifications</span>
+              <div
+                style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; margin-top: 14px; border-top: 1px solid var(--border); gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button class="btn btn-outline btn-xs" type="button" onclick="openChannelConfigModal('teams')">
+                    <i class="fa-light fa-sliders" style="margin-right: 4px;"></i> Configure
+                  </button>
+                  <button class="btn btn-ghost btn-xs" type="button" onclick="testNotificationChannel('Microsoft Teams')">
+                    <i class="fa-light fa-paper-plane" style="margin-right: 4px;"></i> Test
+                  </button>
+                </div>
+                <button class="btn btn-ghost btn-xs" type="button" title="Mute or pause Teams channel" onclick="toggleChannelStatus('teams')"
+                  id="btn-toggle-teams" style="color: var(--muted-foreground);">
+                  <i class="fa-light fa-power-off"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="kpi-card" style="padding: 18px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <strong style="color: var(--foreground);">PagerDuty Escapes</strong>
-                <span class="badge badge-success" style="font-size: 9.5px;">Connected</span>
+            <!-- Channel 4: PagerDuty -->
+            <div class="kpi-card" id="channel-card-pagerduty"
+              style="padding: 18px; display: flex; flex-direction: column; justify-content: space-between; transition: opacity 150ms ease;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div
+                      style="width: 38px; height: 38px; border-radius: var(--radius-md, 8px); background: #06AC3818; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">
+                      <i class="fa-light fa-bell-ring" style="color: #06AC38;"></i>
+                    </div>
+                    <div>
+                      <strong style="color: var(--foreground); font-size: 14.5px; display: block; line-height: 1.2;">PagerDuty Escapes</strong>
+                      <span style="font-size: 11px; color: var(--muted-foreground);">On-Call Escalation</span>
+                    </div>
+                  </div>
+                  <span class="badge badge-success channel-status-badge" style="font-size: 10px;">Connected</span>
+                </div>
+                <div style="font-size: 12px; margin-bottom: 8px;">
+                  <span style="color: var(--muted-foreground);">Service:</span>
+                  <code id="channel-dest-pagerduty">FinOps Anomaly On-Call</code>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+                  <span style="color: var(--destructive);"><i class="fa-light fa-siren-on" style="margin-right: 4px;"></i>Critical &gt; $5,000/day</span>
+                  <span class="badge badge-outline" style="font-size: 9.5px;">Sev-1 / P1 Only</span>
+                </div>
               </div>
-              <p style="font-size: 12px; color: var(--muted-foreground); margin: 0 0 10px 0;">Service:
-                <code>FinOps Anomaly On-Call</code>
-              </p>
-              <span style="font-size: 11px; color: var(--muted-foreground);">Critical breaches &gt; $5,000/day</span>
+              <div
+                style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; margin-top: 14px; border-top: 1px solid var(--border); gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button class="btn btn-outline btn-xs" type="button" onclick="openChannelConfigModal('pagerduty')">
+                    <i class="fa-light fa-sliders" style="margin-right: 4px;"></i> Configure
+                  </button>
+                  <button class="btn btn-ghost btn-xs" type="button" onclick="testNotificationChannel('PagerDuty')">
+                    <i class="fa-light fa-paper-plane" style="margin-right: 4px;"></i> Test
+                  </button>
+                </div>
+                <button class="btn btn-ghost btn-xs" type="button" title="Mute or pause PagerDuty channel" onclick="toggleChannelStatus('pagerduty')"
+                  id="btn-toggle-pagerduty" style="color: var(--muted-foreground);">
+                  <i class="fa-light fa-power-off"></i>
+                </button>
+              </div>
             </div>
+
           </div>
 
           <!-- Notification Triggers & Policies Configuration -->
@@ -17291,8 +17421,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Alert when hourly spend in any
                     provider exceeds baseline forecast by &gt; 15%.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle Real-Time Spend Anomaly Spike">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
 
               <!-- Trigger 2 -->
@@ -17304,8 +17436,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Notify channel upon crossing 50%,
                     80%, 90%, and 100% of defined budget caps.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle Monthly Budget Threshold Breach">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
 
               <!-- Trigger 3 -->
@@ -17317,8 +17451,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Notify when projection model predicts
                     month-end actual spend will exceed cap.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle End-of-Month Forecast Overrun">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
 
               <!-- Trigger 4 -->
@@ -17330,8 +17466,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Notify when engine identifies
                     optimization opportunities with savings &gt; $500/mo.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle New High-Impact Cost Recommendations">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
 
               <!-- Trigger 5 -->
@@ -17343,8 +17481,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Consolidated PDF and email digest
                     sent every Monday at 08:00 CET.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle Weekly FinOps Executive Summary Digest">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
 
               <!-- Trigger 6 -->
@@ -17355,8 +17495,10 @@
                   <span style="font-size: 12.5px; color: var(--muted-foreground);">Daily report of unallocated cloud
                     resources missing required mandatory tags.</span>
                 </div>
-                <input type="checkbox" checked
-                  style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <label class="switch" title="Toggle Untagged & Orphaned Resource Compliance Alert">
+                  <input type="checkbox" checked>
+                  <span class="switch-thumb"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -17897,6 +18039,68 @@
           <button class="btn btn-outline btn-sm" type="button" onclick="closeAllModals()">Cancel</button>
           <button class="btn btn-primary btn-sm" type="submit">Generate Token <i class="fa-light fa-key"
               style="margin-left: 4px;"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL: CONFIGURE NOTIFICATION CHANNEL (User Settings / Notifications)
+       ======================================================================== -->
+  <div class="app-dialog-backdrop" id="dialog-config-channel" role="dialog" aria-modal="true"
+    aria-labelledby="modal-channel-title">
+    <div class="app-dialog-card" style="max-width: 520px;">
+      <div class="app-dialog-header">
+        <h3 class="app-dialog-title" id="modal-channel-title">Configure Notification Channel</h3>
+        <p class="app-dialog-desc">Manage routing parameters, alert destinations, and webhook settings.</p>
+      </div>
+      <form id="form-config-channel" onsubmit="handleSaveChannelConfig(event)">
+        <input type="hidden" id="channel-config-key" value="">
+        <div class="app-dialog-body">
+          <div class="form-field">
+            <label class="form-label" for="channel-config-name">Channel Name / Integration</label>
+            <input class="input" id="channel-config-name" type="text" readonly
+              style="background: var(--muted); cursor: not-allowed; font-weight: 500;">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="channel-config-destination">Destination / Endpoint *</label>
+            <input class="input" id="channel-config-destination" type="text" required
+              placeholder="e.g. #finops-alerts, email, or webhook URL">
+            <span style="font-size: 11px; color: var(--muted-foreground); margin-top: 4px; display: block;">Slack
+              channel, email address, or incoming webhook URL where alerts are dispatched.</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="channel-config-severity">Minimum Severity Threshold</label>
+            <select class="input" id="channel-config-severity">
+              <option value="all">All Alerts (Informational, Warning, Critical)</option>
+              <option value="warn_crit" selected>Warning &amp; Critical (Threshold breaches &gt; 80%)</option>
+              <option value="crit_only">Critical / Sev-1 Only (Spikes &gt; $5,000/day)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Delivery Options</label>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+                <input type="checkbox" id="channel-opt-batch" checked style="accent-color: var(--primary);"> Enable
+                smart alert batching (max 1 dispatch / 10m)
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+                <input type="checkbox" id="channel-opt-mention" style="accent-color: var(--primary);"> Tag FinOps
+                Lead (@simone.borghi) on critical spikes
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="app-dialog-footer"
+          style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <button class="btn btn-outline btn-sm text-destructive" type="button"
+            onclick="handleDisconnectChannelFromModal()"><i class="fa-light fa-trash-can" style="margin-right: 4px;"></i>
+            Disconnect</button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" type="button" onclick="closeAllModals()">Cancel</button>
+            <button class="btn btn-primary btn-sm" type="submit">Save Changes</button>
+          </div>
         </div>
       </form>
     </div>
@@ -21360,6 +21564,216 @@
         showToast('Test Notification Sent', 'Alert dispatched to Slack #finops-alerts and simone.borghi@company.com', 'info');
       }
 
+      // Notification Integrations State & Actions
+      const notificationChannels = {
+        slack: {
+          name: 'Slack Integration',
+          dest: '#finops-alerts',
+          severity: 'all',
+          batch: true,
+          mention: false,
+          connected: true
+        },
+        email: {
+          name: 'Email Delivery',
+          dest: 'simone.borghi@company.com',
+          severity: 'warn_crit',
+          batch: true,
+          mention: false,
+          connected: true
+        },
+        teams: {
+          name: 'Microsoft Teams',
+          dest: 'FinOps Core Channel',
+          severity: 'warn_crit',
+          batch: true,
+          mention: false,
+          connected: true
+        },
+        pagerduty: {
+          name: 'PagerDuty Escapes',
+          dest: 'FinOps Anomaly On-Call',
+          severity: 'crit_only',
+          batch: false,
+          mention: true,
+          connected: true
+        }
+      };
+
+      function openChannelConfigModal(key) {
+        const modal = document.getElementById('dialog-config-channel');
+        if (!modal) return;
+
+        const titleEl = document.getElementById('modal-channel-title');
+        const keyInput = document.getElementById('channel-config-key');
+        const nameInput = document.getElementById('channel-config-name');
+        const destInput = document.getElementById('channel-config-destination');
+        const sevSelect = document.getElementById('channel-config-severity');
+        const batchCheckbox = document.getElementById('channel-opt-batch');
+        const mentionCheckbox = document.getElementById('channel-opt-mention');
+        const disconnectBtn = modal.querySelector('.text-destructive');
+
+        if (key === 'new') {
+          if (titleEl) titleEl.textContent = 'Add Notification Channel';
+          if (keyInput) keyInput.value = 'new';
+          if (nameInput) {
+            nameInput.value = 'Custom Webhook / ChatOps';
+            nameInput.readOnly = false;
+            nameInput.style.background = 'var(--background)';
+            nameInput.style.cursor = 'text';
+          }
+          if (destInput) destInput.value = '';
+          if (sevSelect) sevSelect.value = 'warn_crit';
+          if (batchCheckbox) batchCheckbox.checked = true;
+          if (mentionCheckbox) mentionCheckbox.checked = false;
+          if (disconnectBtn) disconnectBtn.style.display = 'none';
+        } else if (notificationChannels[key]) {
+          const ch = notificationChannels[key];
+          if (titleEl) titleEl.textContent = `Configure ${ch.name}`;
+          if (keyInput) keyInput.value = key;
+          if (nameInput) {
+            nameInput.value = ch.name;
+            nameInput.readOnly = true;
+            nameInput.style.background = 'var(--muted)';
+            nameInput.style.cursor = 'not-allowed';
+          }
+          if (destInput) destInput.value = ch.dest;
+          if (sevSelect) sevSelect.value = ch.severity;
+          if (batchCheckbox) batchCheckbox.checked = !!ch.batch;
+          if (mentionCheckbox) mentionCheckbox.checked = !!ch.mention;
+          if (disconnectBtn) disconnectBtn.style.display = 'inline-flex';
+        }
+
+        modal.classList.add('is-open');
+        if (destInput) setTimeout(() => destInput.focus(), 80);
+      }
+
+      function handleSaveChannelConfig(e) {
+        e.preventDefault();
+        const keyInput = document.getElementById('channel-config-key');
+        const destInput = document.getElementById('channel-config-destination');
+        const sevSelect = document.getElementById('channel-config-severity');
+        const batchCheckbox = document.getElementById('channel-opt-batch');
+        const mentionCheckbox = document.getElementById('channel-opt-mention');
+
+        const key = keyInput ? keyInput.value : '';
+        const dest = destInput ? destInput.value.trim() : '';
+
+        if (!dest) {
+          showToast('Validation Error', 'Please specify a destination endpoint or channel name.', 'destructive');
+          return;
+        }
+
+        if (key === 'new') {
+          closeAllModals();
+          showToast('Channel Connected', `New integration configured and verified with endpoint: ${dest}`, 'success');
+          return;
+        }
+
+        if (notificationChannels[key]) {
+          const ch = notificationChannels[key];
+          ch.dest = dest;
+          if (sevSelect) ch.severity = sevSelect.value;
+          if (batchCheckbox) ch.batch = batchCheckbox.checked;
+          if (mentionCheckbox) ch.mention = mentionCheckbox.checked;
+
+          ch.connected = true;
+
+          const destCode = document.getElementById(`channel-dest-${key}`);
+          if (destCode) destCode.textContent = dest;
+
+          const card = document.getElementById(`channel-card-${key}`);
+          if (card) {
+            card.style.opacity = '1';
+            const badge = card.querySelector('.channel-status-badge');
+            if (badge) {
+              badge.className = 'badge badge-success channel-status-badge';
+              badge.textContent = 'Connected';
+            }
+          }
+
+          const toggleBtn = document.getElementById(`btn-toggle-${key}`);
+          if (toggleBtn) {
+            toggleBtn.style.color = 'var(--muted-foreground)';
+            toggleBtn.title = `Mute or pause ${ch.name}`;
+          }
+
+          closeAllModals();
+          showToast('Settings Saved', `${ch.name} integration updated to ${dest}.`, 'success');
+        } else {
+          closeAllModals();
+        }
+      }
+
+      function handleDisconnectChannelFromModal() {
+        const keyInput = document.getElementById('channel-config-key');
+        const key = keyInput ? keyInput.value : '';
+        if (notificationChannels[key]) {
+          const ch = notificationChannels[key];
+          ch.connected = false;
+
+          const card = document.getElementById(`channel-card-${key}`);
+          if (card) {
+            card.style.opacity = '0.55';
+            const badge = card.querySelector('.channel-status-badge');
+            if (badge) {
+              badge.className = 'badge badge-secondary channel-status-badge';
+              badge.textContent = 'Disconnected';
+            }
+          }
+
+          const toggleBtn = document.getElementById(`btn-toggle-${key}`);
+          if (toggleBtn) {
+            toggleBtn.style.color = 'var(--destructive)';
+            toggleBtn.title = `Re-enable ${ch.name}`;
+          }
+
+          closeAllModals();
+          showToast('Channel Disconnected', `${ch.name} alert integration was unlinked.`, 'warning');
+        }
+      }
+
+      function testNotificationChannel(channelName) {
+        showToast('Dispatching Alert', `Sending test webhook trigger to ${channelName}...`, 'info');
+        setTimeout(() => {
+          showToast('Delivery Verified', `200 OK received from ${channelName} notification endpoint.`, 'success');
+        }, 1100);
+      }
+
+      function toggleChannelStatus(key) {
+        if (!notificationChannels[key]) return;
+        const ch = notificationChannels[key];
+        ch.connected = !ch.connected;
+
+        const card = document.getElementById(`channel-card-${key}`);
+        const badge = card ? card.querySelector('.channel-status-badge') : null;
+        const toggleBtn = document.getElementById(`btn-toggle-${key}`);
+
+        if (ch.connected) {
+          if (card) card.style.opacity = '1';
+          if (badge) {
+            badge.className = 'badge badge-success channel-status-badge';
+            badge.textContent = 'Connected';
+          }
+          if (toggleBtn) {
+            toggleBtn.style.color = 'var(--muted-foreground)';
+            toggleBtn.title = `Mute or pause ${ch.name}`;
+          }
+          showToast('Integration Active', `${ch.name} alert delivery resumed.`, 'success');
+        } else {
+          if (card) card.style.opacity = '0.6';
+          if (badge) {
+            badge.className = 'badge badge-secondary channel-status-badge';
+            badge.textContent = 'Muted';
+          }
+          if (toggleBtn) {
+            toggleBtn.style.color = 'var(--warning)';
+            toggleBtn.title = `Resume notifications for ${ch.name}`;
+          }
+          showToast('Integration Muted', `${ch.name} notifications temporarily silenced.`, 'warning');
+        }
+      }
+
       function signOutAllOtherSessions() {
         showToast('Sessions Terminated', 'All other active sessions have been signed out remotely.', 'destructive');
       }
@@ -21454,6 +21868,11 @@
       window.saveUserProfile = saveUserProfile;
       window.saveNotificationPrefs = saveNotificationPrefs;
       window.sendTestNotification = sendTestNotification;
+      window.openChannelConfigModal = openChannelConfigModal;
+      window.handleSaveChannelConfig = handleSaveChannelConfig;
+      window.handleDisconnectChannelFromModal = handleDisconnectChannelFromModal;
+      window.testNotificationChannel = testNotificationChannel;
+      window.toggleChannelStatus = toggleChannelStatus;
       window.signOutAllOtherSessions = signOutAllOtherSessions;
       window.openInviteTeamModal = openInviteTeamModal;
       window.handleInviteTeam = handleInviteTeam;
